@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Calculator</title>
+<style>
+body{
+  font-family:Arial;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  margin:0;
+}
+.box{
+  width:280px;
+  text-align:center;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 0 10px #0003;
+}
+input,select,button{
+  width:100%;
+  margin:8px 0;
+  padding:10px;
+  border-radius:6px;
+}
+</style>
+</head>
+<body>
+<div class="box">
+<h3>Simple Calculator</h3>
+<input id="a" placeholder="First number"><br><br>
+<input id="b" placeholder="Second number"><br><br>
+
+<select id="op">
+  <option value="">Select</option>
+  <option value="sum">Sum</option>
+  <option value="product">Product</option>
+  <option value="difference">Difference</option>
+  <option value="remainder">Remainder</option>
+  <option value="quotient">Quotient</option>
+  <option value="power">Power</option>
+  <option value="sqrt">Square Root</option>
+  <option value="square">Square</option>
+</select>
+
+<button onclick="calc()">Go</button>
+<p id="out"></p>
+</div>
+<script>
+function calc(){
+ let x=parseFloat(a.value),y=parseFloat(b.value),o=op.value,r="";
+ if(isNaN(x)||isNaN(y)){r="Enter valid numbers";}
+ else{
+  switch(o){
+   case"sum":r=x+y;break;
+   case"product":r=x*y;break;
+   case"difference":r=x-y;break;
+   case"remainder":r=x%y;break;
+   case"quotient":r=y?x/y:"Cannot divide by zero";break;
+   case"power":r=x**y;break;
+   case"sqrt":r=`√${x}=${Math.sqrt(x)} , √${y}=${Math.sqrt(y)}`;break;
+   case"square":r=`${x}²=${x*x} , ${y}²=${y*y}`;break;
+   default:r="Select operation";
+  }
+ }
+ out.innerHTML=r;
+}
+</script>
+
+</body>
+</html>

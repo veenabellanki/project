@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple jQuery Example</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    #animateBox {
+      width: 100px;
+      height: 100px;
+      background: blue;
+      color: white;
+      text-align: center;
+      line-height: 100px;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p id="para">This is a paragraph.</p>
+
+  <ul id="items">
+    <li>List Item 1</li>
+    <li>List Item 2</li>
+  </ul>
+
+  <div id="animateBox">Box</div>
+
+  <button id="add">Append Content</button>
+  <button id="animateButton">Animate Box</button>
+
+  <script>
+    $(document).ready(function () {
+
+      $("#add").click(function () {
+        $("#para").append(" Added text.");
+        $("#items").append("<li>New item</li>");
+      });
+
+      $("#animateButton").click(function () {
+        $("#animateBox").animate({
+          width: "200px",
+          height: "200px"
+        }, 1000).css("background","green");
+      });
+
+    });
+  </script>
+
+</body>
+</html>

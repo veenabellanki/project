@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<style>
+body{font-family:Arial;padding:20px}
+.box{margin-bottom:25px;padding:15px;border:1px solid #ddd;border-radius:8px}
+h1{text-align:center;background:#000;color:#fff;padding:10px;border-radius:6px}
+textarea,input{width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:6px}
+button{padding:10px 15px;background:#007bff;color:#fff;border-radius:6px;cursor:pointer}
+pre{background:#f5f5f5;padding:10px;border-radius:6px;display:none;margin-top:10px}
+</style>
+</head>
+<body>
+
+<h1>Simple Converter</h1>
+
+<div class="box">
+<h3>1. JSON → Object</h3>
+<textarea id="j1"></textarea>
+<button onclick="toObj()">Convert</button>
+<pre id="o1"></pre>
+</div>
+
+<div class="box">
+<h3>2. JSON Date → Date</h3>
+<textarea id="j2"></textarea>
+<button onclick="toDate()">Convert</button>
+<pre id="o2"></pre>
+</div>
+
+<div class="box">
+<h3>3. JSON ↔ CSV</h3>
+<textarea id="j3"></textarea>
+<button onclick="j2c()">JSON→CSV</button>
+<pre id="o3"></pre>
+<textarea id="j4"></textarea>
+<button onclick="c2j()">CSV→JSON</button>
+<pre id="o4"></pre>
+</div>
+
+<div class="box">
+<h3>4. Hash String</h3>
+<input id="h1" placeholder="Enter text">
+<button onclick="hash()">Hash</button>
+<pre id="o5"></pre>
+</div>
+
+<script>
+function show(id,t){let e=document.getElementById(id);e.style.display="block";e.textContent=t;}
+function toObj(){try{show("o1",JSON.stringify(JSON.parse(j1.value),null,2))}catch(e){show("o1","Invalid JSON")}}
+function toDate(){try{let d=JSON.parse(j2.value).date;show("o2",new Date(d))}catch(e){show("o2","Invalid")}}
+function j2c(){try{let a=JSON.parse(j3.value),k=Object.keys(a[0]),c=[k.join(",")];
+                    a.forEach(r=>c.push(k.map(x=>r[x]).join(",")));
+                    show("o3",c.join("\n"))}catch(e){show("o3","Invalid JSON")}}
+function c2j(){try{let l=j4.value.trim().split("\n"),k=l[0].split(","),a=l.slice(1).map(x=>{let v=x.split(","),o={};
+                             k.forEach((y,i)=>o[y]=v[i]);return o});
+                             show("o4",JSON.stringify(a,null,2))}catch(e){show("o4","Invalid CSV")}}
+function hash(){show("o5",CryptoJS.SHA256(h1.value).toString())}
+</script>
+
+</body>
+</html>
